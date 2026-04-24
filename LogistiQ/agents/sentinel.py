@@ -21,7 +21,7 @@ Given an IOT_ANOMALY alert, respond ONLY with a JSON object containing:
 - causal_chain: array of strings (ordered reasoning steps leading to the conclusion)
 - recommended_action: string (immediate corrective action)
 - urgency: string (CRITICAL / HIGH / MEDIUM / LOW)
-- estimated_goods_at_risk: string (monetary estimate, e.g. "\u20b94,20,000 in pharmaceutical inventory")
+- estimated_goods_at_risk: string (monetary estimate, e.g. "₹4,20,000 in pharmaceutical inventory")
 
 Return ONLY valid JSON. No explanation, no markdown."""
 

@@ -23,7 +23,7 @@ Given the Arbiter's output, respond ONLY with a JSON object containing:
 - requires_human_attention: boolean
 - human_attention_reason: string or null (what the human must do and by when, if applicable)
 - confidence_overall: float 0-1
-- estimated_cost_impact: string (e.g. "Prevented estimated \u20b96,02,000 in combined losses")
+- estimated_cost_impact: string (e.g. "Prevented estimated ₹6,02,000 in combined losses")
 - incident_report: object with:
   - title: string
   - timestamp: string (ISO 8601)

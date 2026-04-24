@@ -16,7 +16,7 @@ intelligence system. You specialise in inventory reconciliation.
 Given an RFID_MISMATCH alert, respond ONLY with a JSON object containing:
 - event_id: string (copy from input)
 - gap_quantity: integer (number of missing units)
-- gap_value_estimate: string (estimated monetary value, e.g. "\u20b91,82,000")
+- gap_value_estimate: string (estimated monetary value, e.g. "₹1,82,000")
 - recount_priority: string (HIGH / MEDIUM / LOW)
 - will_reroute_worsen_shortage: boolean
 - shortage_context: string (plain English description of the shortage impact)
