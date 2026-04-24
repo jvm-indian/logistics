@@ -1,301 +1,457 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>LogistiQ Control Panel</title>
-		<style>
-			:root {
-				color-scheme: dark;
-				--bg: #0b1020;
-				--panel: rgba(17, 24, 39, 0.88);
-				--panel-2: rgba(30, 41, 59, 0.75);
-				--border: rgba(148, 163, 184, 0.2);
-				--text: #e5eefb;
-				--muted: #9fb1cc;
-				--accent: #6ee7ff;
-				--good: #34d399;
-				--warn: #fbbf24;
-				--bad: #f87171;
-			}
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LogistiQ Control Panel</title>
+<style>
+:root {
+color-scheme: dark;
+--bg: #0b1020;
+--panel: rgba(17, 24, 39, 0.88);
+--panel-2: rgba(30, 41, 59, 0.75);
+--border: rgba(148, 163, 184, 0.2);
+--text: #e5eefb;
+--muted: #9fb1cc;
+--accent: #6ee7ff;
+--good: #34d399;
+--warn: #fbbf24;
+--bad: #f87171;
+}
 
-			* { box-sizing: border-box; }
-			body {
-				margin: 0;
-				font-family: Inter, Segoe UI, Arial, sans-serif;
-				background:
-					radial-gradient(circle at top left, rgba(110, 231, 255, 0.16), transparent 32%),
-					radial-gradient(circle at bottom right, rgba(52, 211, 153, 0.12), transparent 28%),
-					var(--bg);
-				color: var(--text);
-				min-height: 100vh;
-			}
+* { box-sizing: border-box; }
+body {
+margin: 0;
+font-family: Inter, Segoe UI, Arial, sans-serif;
+background:
+radial-gradient(circle at top left, rgba(110, 231, 255, 0.16), transparent 32%),
+radial-gradient(circle at bottom right, rgba(52, 211, 153, 0.12), transparent 28%),
+var(--bg);
+color: var(--text);
+min-height: 100vh;
+}
 
-			header {
-				padding: 28px 32px 16px;
-				display: flex;
-				justify-content: space-between;
-				align-items: end;
-				gap: 20px;
-			}
+header {
+padding: 28px 32px 16px;
+display: flex;
+justify-content: space-between;
+align-items: end;
+gap: 20px;
+}
 
-			h1 {
-				margin: 0;
-				font-size: 32px;
-				letter-spacing: 0.3px;
-			}
+h1 {
+margin: 0;
+font-size: 32px;
+letter-spacing: 0.3px;
+}
 
-			.subtitle { color: var(--muted); margin-top: 8px; }
+.subtitle { color: var(--muted); margin-top: 8px; }
 
-			.status {
-				padding: 10px 14px;
-				border-radius: 999px;
-				border: 1px solid var(--border);
-				background: rgba(15, 23, 42, 0.6);
-				color: var(--accent);
-				font-size: 13px;
-			}
+.status {
+padding: 10px 14px;
+border-radius: 999px;
+border: 1px solid var(--border);
+background: rgba(15, 23, 42, 0.6);
+color: var(--accent);
+font-size: 13px;
+}
 
-			main {
-				padding: 0 32px 32px;
-				display: grid;
-				gap: 18px;
-				grid-template-columns: 1.2fr 0.8fr;
-			}
+main {
+padding: 0 32px 32px;
+display: grid;
+gap: 18px;
+grid-template-columns: 1.2fr 0.8fr;
+}
 
-			.card {
-				background: var(--panel);
-				border: 1px solid var(--border);
-				border-radius: 18px;
-				box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-				overflow: hidden;
-			}
+.card {
+background: var(--panel);
+border: 1px solid var(--border);
+border-radius: 18px;
+box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+overflow: hidden;
+}
 
-			.card header {
-				padding: 16px 18px;
-				border-bottom: 1px solid var(--border);
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-			}
+.card header {
+padding: 16px 18px;
+border-bottom: 1px solid var(--border);
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
 
-			.card h2 {
-				margin: 0;
-				font-size: 16px;
-				letter-spacing: 0.4px;
-			}
+.card h2 {
+margin: 0;
+font-size: 16px;
+letter-spacing: 0.4px;
+}
 
-			.card .body { padding: 16px 18px 18px; }
+.card .body { padding: 16px 18px 18px; }
 
-			.timeline {
-				display: grid;
-				gap: 12px;
-			}
+.timeline {
+display: grid;
+gap: 12px;
+}
 
-			.event {
-				background: var(--panel-2);
-				border: 1px solid var(--border);
-				border-radius: 14px;
-				padding: 14px;
-			}
+.event {
+background: var(--panel-2);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 14px;
+}
 
-			.event-top {
-				display: flex;
-				justify-content: space-between;
-				gap: 12px;
-				align-items: center;
-				margin-bottom: 8px;
-			}
+.event-top {
+display: flex;
+justify-content: space-between;
+gap: 12px;
+align-items: center;
+margin-bottom: 8px;
+}
 
-			.channel {
-				font-size: 12px;
-				color: var(--accent);
-				text-transform: uppercase;
-				letter-spacing: 0.1em;
-			}
+.channel {
+font-size: 12px;
+color: var(--accent);
+text-transform: uppercase;
+letter-spacing: 0.1em;
+}
 
-			.time { color: var(--muted); font-size: 12px; }
-			pre {
-				margin: 0;
-				white-space: pre-wrap;
-				word-break: break-word;
-				font-size: 13px;
-				line-height: 1.45;
-				color: #dbeafe;
-			}
+.time { color: var(--muted); font-size: 12px; }
+pre {
+margin: 0;
+white-space: pre-wrap;
+word-break: break-word;
+font-size: 13px;
+line-height: 1.45;
+color: #dbeafe;
+}
 
-			.metrics {
-				display: grid;
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-				gap: 12px;
-			}
+.metrics {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 12px;
+}
 
-			.metric {
-				background: var(--panel-2);
-				border: 1px solid var(--border);
-				border-radius: 14px;
-				padding: 14px;
-			}
+.metric {
+background: var(--panel-2);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 14px;
+}
 
-			.metric .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
-			.metric .value { font-size: 26px; margin-top: 8px; }
+.metric .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+.metric .value { font-size: 26px; margin-top: 8px; }
 
-			.legend {
-				display: flex;
-				gap: 10px;
-				flex-wrap: wrap;
-				margin-top: 12px;
-			}
+.commander-card {
+grid-column: 1 / -1;
+background: var(--panel);
+border: 1px solid var(--border);
+border-radius: 18px;
+box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+overflow: hidden;
+}
 
-			.pill {
-				border: 1px solid var(--border);
-				border-radius: 999px;
-				padding: 6px 10px;
-				font-size: 12px;
-				color: var(--muted);
-			}
+.commander-body {
+padding: 16px 18px 18px;
+display: grid;
+gap: 10px;
+}
 
-			.good { color: var(--good); }
-			.warn { color: var(--warn); }
-			.bad { color: var(--bad); }
+.commander-summary {
+background: var(--panel-2);
+border: 1px solid var(--border);
+border-radius: 14px;
+padding: 14px;
+font-size: 14px;
+line-height: 1.6;
+}
 
-			@media (max-width: 980px) {
-				main { grid-template-columns: 1fr; }
-				header { align-items: start; flex-direction: column; }
-			}
-		</style>
-	</head>
-	<body>
-		<header>
-			<div>
-				<h1>LogistiQ Control Panel</h1>
-				<div class="subtitle">Live Redis event stream for raw telemetry, anomaly alerts, and reroute decisions.</div>
-			</div>
-			<div class="status" id="connectionStatus">Connecting…</div>
-		</header>
+.commander-summary .label {
+color: var(--muted);
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+margin-bottom: 6px;
+}
 
-		<main>
-			<section class="card">
-				<header>
-					<h2>Event Stream</h2>
-					<span class="pill" id="eventCount">0 events</span>
-				</header>
-				<div class="body">
-					<div class="timeline" id="timeline"></div>
-				</div>
-			</section>
+.action-list {
+display: grid;
+gap: 6px;
+}
 
-			<section class="card">
-				<header>
-					<h2>Pipeline Health</h2>
-					<span class="pill">Scout → Router</span>
-				</header>
-				<div class="body">
-					<div class="metrics">
-						<div class="metric">
-							<div class="label">Latest Channel</div>
-							<div class="value" id="latestChannel">—</div>
-						</div>
-						<div class="metric">
-							<div class="label">Latest Event ID</div>
-							<div class="value" id="latestEventId">—</div>
-						</div>
-						<div class="metric">
-							<div class="label">Scout Alerts</div>
-							<div class="value good" id="scoutAlerts">0</div>
-						</div>
-						<div class="metric">
-							<div class="label">Router Outputs</div>
-							<div class="value warn" id="routerOutputs">0</div>
-						</div>
-					</div>
+.action-item {
+background: var(--panel-2);
+border: 1px solid var(--border);
+border-radius: 10px;
+padding: 10px 14px;
+font-size: 13px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
 
-					<div class="legend">
-						<span class="pill">logistiq:raw_data</span>
-						<span class="pill">logistiq:alerts</span>
-						<span class="pill">logistiq:router_output</span>
-					</div>
-				</div>
-			</section>
-		</main>
+.legend {
+display: flex;
+gap: 10px;
+flex-wrap: wrap;
+margin-top: 12px;
+}
 
-		<script>
-			const timeline = document.getElementById("timeline");
-			const connectionStatus = document.getElementById("connectionStatus");
-			const eventCount = document.getElementById("eventCount");
-			const latestChannel = document.getElementById("latestChannel");
-			const latestEventId = document.getElementById("latestEventId");
-			const scoutAlerts = document.getElementById("scoutAlerts");
-			const routerOutputs = document.getElementById("routerOutputs");
+.pill {
+border: 1px solid var(--border);
+border-radius: 999px;
+padding: 6px 10px;
+font-size: 12px;
+color: var(--muted);
+}
 
-			let totalEvents = 0;
-			let scoutCount = 0;
-			let routerCount = 0;
+.good { color: var(--good); }
+.warn { color: var(--warn); }
+.bad { color: var(--bad); }
 
-			function renderEvent(event) {
-				totalEvents += 1;
-				eventCount.textContent = `${totalEvents} events`;
-				latestChannel.textContent = event.channel || "unknown";
+.human-alert {
+background: rgba(251, 191, 36, 0.12);
+border: 1px solid rgba(251, 191, 36, 0.4);
+border-radius: 14px;
+padding: 14px;
+color: var(--warn);
+font-size: 13px;
+display: none;
+}
 
-				const payload = typeof event.data === "string" ? safeParse(event.data) : event.data;
-				latestEventId.textContent = payload && payload.event_id ? payload.event_id : "—";
+.human-alert.visible { display: block; }
 
-				if (event.channel === "logistiq:alerts") scoutCount += 1;
-				if (event.channel === "logistiq:router_output") routerCount += 1;
-				scoutAlerts.textContent = scoutCount;
-				routerOutputs.textContent = routerCount;
+@media (max-width: 980px) {
+main { grid-template-columns: 1fr; }
+header { align-items: start; flex-direction: column; }
+.commander-card { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+<header>
+<div>
+<h1>LogistiQ Control Panel</h1>
+<div class="subtitle">Autonomous supply chain intelligence — Scout → Router / Audit / Sentinel → Arbiter → Commander</div>
+</div>
+<div class="status" id="connectionStatus">Connecting…</div>
+</header>
 
-				const node = document.createElement("article");
-				node.className = "event";
-				node.innerHTML = `
-					<div class="event-top">
-						<div class="channel">${escapeHtml(event.channel || "unknown")}</div>
-						<div class="time">${new Date().toLocaleTimeString()}</div>
-					</div>
-					<pre>${escapeHtml(JSON.stringify(payload ?? event.data, null, 2))}</pre>
-				`;
-				timeline.prepend(node);
-			}
+<main>
+<!-- Commander executive summary (full width) -->
+<section class="commander-card">
+<header>
+<h2>⚡ Commander — Executive Summary</h2>
+<span class="pill" id="commanderConfidence">—</span>
+</header>
+<div class="commander-body">
+<div class="human-alert" id="humanAlert">
+⚠️ <strong>Human attention required:</strong> <span id="humanAlertReason">—</span>
+</div>
+<div class="commander-summary">
+<div class="label">Latest briefing</div>
+<div id="commanderSummary">Waiting for Commander output…</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+<div>
+<div class="label" style="color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Actions taken</div>
+<div class="action-list" id="actionsTaken"></div>
+</div>
+<div>
+<div class="label" style="color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Actions blocked</div>
+<div class="action-list" id="actionsBlocked"></div>
+</div>
+</div>
+<div style="color:var(--muted);font-size:12px;" id="costImpact"></div>
+</div>
+</section>
 
-			function safeParse(value) {
-				try { return JSON.parse(value); } catch { return value; }
-			}
+<!-- Live event stream -->
+<section class="card">
+<header>
+<h2>Event Stream</h2>
+<span class="pill" id="eventCount">0 events</span>
+</header>
+<div class="body">
+<div class="timeline" id="timeline"></div>
+</div>
+</section>
 
-			function escapeHtml(value) {
-				return String(value)
-					.replaceAll("&", "&amp;")
-					.replaceAll("<", "&lt;")
-					.replaceAll(">", "&gt;")
-					.replaceAll('"', "&quot;")
-					.replaceAll("'", "&#039;");
-			}
+<!-- Pipeline health metrics -->
+<section class="card">
+<header>
+<h2>Pipeline Health</h2>
+<span class="pill">All 6 agents</span>
+</header>
+<div class="body">
+<div class="metrics">
+<div class="metric">
+<div class="label">Latest Channel</div>
+<div class="value" id="latestChannel">—</div>
+</div>
+<div class="metric">
+<div class="label">Latest Event ID</div>
+<div class="value" id="latestEventId">—</div>
+</div>
+<div class="metric">
+<div class="label">Scout Alerts</div>
+<div class="value good" id="scoutAlerts">0</div>
+</div>
+<div class="metric">
+<div class="label">Router Outputs</div>
+<div class="value warn" id="routerOutputs">0</div>
+</div>
+<div class="metric">
+<div class="label">Audit Outputs</div>
+<div class="value warn" id="auditOutputs">0</div>
+</div>
+<div class="metric">
+<div class="label">Sentinel Outputs</div>
+<div class="value bad" id="sentinelOutputs">0</div>
+</div>
+<div class="metric">
+<div class="label">Arbiter Decisions</div>
+<div class="value" id="arbiterOutputs">0</div>
+</div>
+<div class="metric">
+<div class="label">Commander Briefings</div>
+<div class="value good" id="commanderOutputs">0</div>
+</div>
+</div>
 
-			async function loadSnapshot() {
-				const response = await fetch("/snapshot");
-				const data = await response.json();
-				(data.events || []).forEach(renderEvent);
-			}
+<div class="legend">
+<span class="pill">logistiq:raw_data</span>
+<span class="pill">logistiq:alerts</span>
+<span class="pill">logistiq:router_output</span>
+<span class="pill">logistiq:audit_output</span>
+<span class="pill">logistiq:sentinel_output</span>
+<span class="pill">logistiq:arbiter_output</span>
+<span class="pill">logistiq:commander_output</span>
+</div>
+</div>
+</section>
+</main>
 
-			async function connect() {
-				try {
-					await loadSnapshot();
-					const source = new EventSource("/events");
-					source.onopen = () => {
-						connectionStatus.textContent = "Connected";
-					};
-					source.onmessage = (message) => {
-						renderEvent(JSON.parse(message.data));
-					};
-					source.onerror = () => {
-						connectionStatus.textContent = "Reconnecting…";
-					};
-				} catch (error) {
-					connectionStatus.textContent = "Offline";
-					console.error(error);
-				}
-			}
+<script>
+const timeline = document.getElementById("timeline");
+const connectionStatus = document.getElementById("connectionStatus");
+const eventCount = document.getElementById("eventCount");
+const latestChannel = document.getElementById("latestChannel");
+const latestEventId = document.getElementById("latestEventId");
+const scoutAlerts = document.getElementById("scoutAlerts");
+const routerOutputs = document.getElementById("routerOutputs");
+const auditOutputs = document.getElementById("auditOutputs");
+const sentinelOutputs = document.getElementById("sentinelOutputs");
+const arbiterOutputs = document.getElementById("arbiterOutputs");
+const commanderOutputs = document.getElementById("commanderOutputs");
 
-			connect();
-		</script>
-	</body>
+const commanderSummary = document.getElementById("commanderSummary");
+const commanderConfidence = document.getElementById("commanderConfidence");
+const humanAlert = document.getElementById("humanAlert");
+const humanAlertReason = document.getElementById("humanAlertReason");
+const actionsTaken = document.getElementById("actionsTaken");
+const actionsBlocked = document.getElementById("actionsBlocked");
+const costImpact = document.getElementById("costImpact");
+
+let totalEvents = 0;
+let counts = { alerts: 0, router: 0, audit: 0, sentinel: 0, arbiter: 0, commander: 0 };
+
+function updateCommanderPanel(payload) {
+if (typeof payload !== "object" || payload === null) return;
+if (payload.executive_summary) {
+commanderSummary.textContent = payload.executive_summary;
+}
+if (payload.confidence_overall !== undefined) {
+commanderConfidence.textContent = `Confidence: ${(payload.confidence_overall * 100).toFixed(0)}%`;
+}
+if (payload.requires_human_attention) {
+humanAlert.classList.add("visible");
+humanAlertReason.textContent = payload.human_attention_reason || "Action required.";
+}
+if (payload.estimated_cost_impact) {
+costImpact.textContent = "💰 " + payload.estimated_cost_impact;
+}
+if (Array.isArray(payload.actions_taken)) {
+actionsTaken.innerHTML = payload.actions_taken
+.map(a => `<div class="action-item good">✔ ${escapeHtml(a)}</div>`)
+.join("");
+}
+if (Array.isArray(payload.actions_blocked)) {
+actionsBlocked.innerHTML = payload.actions_blocked
+.map(a => `<div class="action-item bad">✘ ${escapeHtml(a)}</div>`)
+.join("");
+}
+}
+
+function renderEvent(event) {
+totalEvents += 1;
+eventCount.textContent = `${totalEvents} events`;
+latestChannel.textContent = event.channel || "unknown";
+
+const payload = typeof event.data === "string" ? safeParse(event.data) : event.data;
+latestEventId.textContent = payload && payload.event_id ? payload.event_id : "—";
+
+const ch = event.channel || "";
+if (ch === "logistiq:alerts") { counts.alerts += 1; scoutAlerts.textContent = counts.alerts; }
+if (ch === "logistiq:router_output") { counts.router += 1; routerOutputs.textContent = counts.router; }
+if (ch === "logistiq:audit_output") { counts.audit += 1; auditOutputs.textContent = counts.audit; }
+if (ch === "logistiq:sentinel_output") { counts.sentinel += 1; sentinelOutputs.textContent = counts.sentinel; }
+if (ch === "logistiq:arbiter_output") { counts.arbiter += 1; arbiterOutputs.textContent = counts.arbiter; }
+if (ch === "logistiq:commander_output") {
+counts.commander += 1;
+commanderOutputs.textContent = counts.commander;
+updateCommanderPanel(payload);
+}
+
+const node = document.createElement("article");
+node.className = "event";
+node.innerHTML = `
+<div class="event-top">
+<div class="channel">${escapeHtml(event.channel || "unknown")}</div>
+<div class="time">${new Date().toLocaleTimeString()}</div>
+</div>
+<pre>${escapeHtml(JSON.stringify(payload ?? event.data, null, 2))}</pre>
+`;
+timeline.prepend(node);
+}
+
+function safeParse(value) {
+try { return JSON.parse(value); } catch { return value; }
+}
+
+function escapeHtml(value) {
+return String(value)
+.replaceAll("&", "&amp;")
+.replaceAll("<", "&lt;")
+.replaceAll(">", "&gt;")
+.replaceAll('"', "&quot;")
+.replaceAll("'", "&#039;");
+}
+
+async function loadSnapshot() {
+const response = await fetch("/snapshot");
+const data = await response.json();
+(data.events || []).forEach(renderEvent);
+}
+
+async function connect() {
+try {
+await loadSnapshot();
+const source = new EventSource("/events");
+source.onopen = () => {
+connectionStatus.textContent = "Connected";
+};
+source.onmessage = (message) => {
+renderEvent(JSON.parse(message.data));
+};
+source.onerror = () => {
+connectionStatus.textContent = "Reconnecting…";
+};
+} catch (error) {
+connectionStatus.textContent = "Offline";
+console.error(error);
+}
+}
+
+connect();
+</script>
+</body>
 </html>

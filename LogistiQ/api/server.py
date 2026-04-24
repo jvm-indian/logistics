@@ -18,7 +18,15 @@ except Exception:
 APP_ROOT = Path(__file__).resolve().parents[1]
 DASHBOARD_FILE = APP_ROOT / "dashboard" / "index.html"
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
-CHANNELS = ["logistiq:raw_data", "logistiq:alerts", "logistiq:router_output"]
+CHANNELS = [
+	"logistiq:raw_data",
+	"logistiq:alerts",
+	"logistiq:router_output",
+	"logistiq:audit_output",
+	"logistiq:sentinel_output",
+	"logistiq:arbiter_output",
+	"logistiq:commander_output",
+]
 
 app = FastAPI(title="LogistiQ API", version="1.0.0")
 

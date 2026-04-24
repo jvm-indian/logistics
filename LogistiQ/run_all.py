@@ -47,6 +47,22 @@ def _build_commands(count: int, interval: float) -> list[tuple[str, list[str]]]:
 			"router",
 			[python, str(ROOT / "agents" / "router.py")],
 		),
+		(
+			"audit",
+			[python, str(ROOT / "agents" / "audit.py")],
+		),
+		(
+			"sentinel",
+			[python, str(ROOT / "agents" / "sentinel.py")],
+		),
+		(
+			"arbiter",
+			[python, str(ROOT / "agents" / "arbiter.py")],
+		),
+		(
+			"commander",
+			[python, str(ROOT / "agents" / "commander.py")],
+		),
 	]
 
 
@@ -97,7 +113,7 @@ async def run_all(count: int, interval: float) -> int:
 
 
 def parse_args() -> argparse.Namespace:
-	parser = argparse.ArgumentParser(description="Run LogistiQ simulator, API, Scout, and Router as separate agents.")
+	parser = argparse.ArgumentParser(description="Run the full LogistiQ agent pipeline: simulator, API, Scout, Router, Audit, Sentinel, Arbiter, and Commander.")
 	parser.add_argument("--count", type=int, default=1, help="Number of simulator events to emit. Use 0 for continuous streaming.")
 	parser.add_argument("--interval", type=float, default=2.0, help="Seconds between simulated events.")
 	return parser.parse_args()
